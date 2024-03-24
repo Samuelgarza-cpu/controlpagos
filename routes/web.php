@@ -39,20 +39,26 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('registros', App\Http\Controllers\RegistrosController::class);
-    Route::get('/imagen', [ImagenPruebaController::class, 'index'])->name('img.index');
-    Route::get('/imagen/create', [ImagenPruebaController::class, 'create'])->name('img.create');
-    Route::post('/imagen', [ImagenPruebaController::class, 'store'])->name('img.store');
+
+    //    ---------------------  EJEMPLO DE SUBIR IMAGENES ----------------------
+    Route::get('/imagen', [ImagenPruebaController::class, 'index'])->name('img.index');   //EN EL INDEX SE MUESTRA LA TABLA, TIENE BOTON PARA LLAMAR AL CREATE
+    Route::get('/imagen/create', [ImagenPruebaController::class, 'create'])->name('img.create'); // EN EL CREATE SE MUESTRA EL FORMULARIO
+    Route::post('/imagen', [ImagenPruebaController::class, 'store'])->name('img.store'); // DESDE EL CREATE EN EL FORM SE ENVIA LA DATA A STORE
     Route::delete('/imagen/{imagenPrueba}', [ImagenPruebaController::class, 'destroy'])->name('img.destroy');
 });
 
 Route::prefix('control')->middleware('auth')->group(function () {
-    Route::get('niveles', [NivelController::class, 'index'])->name('niveles.index');
+    // -------------------------------------------AREA DE INFLUENCIA----------------------------------------------
     Route::get('areas-influencia', [AreaInfluenciaController::class, 'index'])->name('areas.index');
     Route::get('areas-influencia/create', [AreaInfluenciaController::class, 'create'])->name('areas.create');
-    Route::delete('areas-influencia/{areaInfluencia}', [AreaInfluenciaController::class, 'destroy'])->name('areas.destroy');
-    Route::get('areas-influencia/{areaInfluencia}/edit', [AreaInfluenciaController::class, 'edit'])->name('areas.edit');
-    Route::post('areas-influencia/{areaInfluencia}', [AreaInfluenciaController::class, 'update'])->name('areas.update');
     Route::post('areas-influencia', [AreaInfluenciaController::class, 'store'])->name('areas.store');
+
+    Route::get('areas-influencia/{areaInfluencia}/edit', [AreaInfluenciaController::class, 'edit'])->name('areas.edit'); //EDIT SE MANDA A LLAMAR DESDE LA TABLA DEL INDEX
+    Route::post('areas-influencia/{areaInfluencia}', [AreaInfluenciaController::class, 'update'])->name('areas.update'); //EN UPDATE VIENE LA DATA ACTUALIZADA DE EDIT
+    Route::delete('areas-influencia/{areaInfluencia}', [AreaInfluenciaController::class, 'destroy'])->name('areas.destroy');
+
+    // --------------------------------------------------NIVELES------------------------------------------------------
+    Route::get('niveles', [NivelController::class, 'index'])->name('niveles.index');
     Route::get('estructuras', [EstructuraController::class, 'index'])->name('estructuras.index');
     Route::get('tipo-eleccion', [TipoEleccionController::class, 'index'])->name('tipos.index');
 });
