@@ -30,6 +30,11 @@ export default function Authenticated({ user, header, children }) {
                                     Registros
                                 </NavLink>
                             </div>
+                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                <NavLink href={route('areas.index')} active={route().current('areas.index')}>
+                                    Areas de Influencia
+                                </NavLink>
+                            </div>
 
                         </div>
 
@@ -105,6 +110,12 @@ export default function Authenticated({ user, header, children }) {
                     <div className="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink href={route('registros.index')} active={route().current('registros.index')}>
                             Registros
+                        </ResponsiveNavLink>
+                    </div>
+
+                    <div className="pt-2 pb-3 space-y-1">
+                        <ResponsiveNavLink href={route('areas.index')} active={route().current('areas.index')}>
+                            Areas de Influencia
                         </ResponsiveNavLink>
                     </div>
 
