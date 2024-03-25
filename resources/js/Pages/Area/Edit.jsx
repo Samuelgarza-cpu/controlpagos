@@ -20,9 +20,9 @@ const EditArea = ({ auth, areaInfluencia }) => {
             user={auth.user}
             header={
                 <div className='flex justify-between'>
-                    <h2 className="font-semibold text-xl text-gray-800 leading-tight">Actualizar Areas de Influencia</h2>
+                    <h2 className="font-semibold text-xl text-gray-800 leading-tight">ACTUALIZAR AREA DE INFLUENCIA</h2>
                     <Link href={route('areas.index')}>
-                        Areas de Incluencias
+                        AREAS DE INFLUENCIA
                     </Link>
                 </div>
             }

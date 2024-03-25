@@ -35,6 +35,11 @@ export default function Authenticated({ user, header, children }) {
                                     Areas de Influencia
                                 </NavLink>
                             </div>
+                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                <NavLink href={route('estructuras.index')} active={route().current('estructuras.index')}>
+                                    Estructuras
+                                </NavLink>
+                            </div>
 
                         </div>
 
@@ -66,9 +71,9 @@ export default function Authenticated({ user, header, children }) {
                                     </Dropdown.Trigger>
 
                                     <Dropdown.Content>
-                                        <Dropdown.Link href={route('profile.edit')}>Profile</Dropdown.Link>
+                                        <Dropdown.Link href={route('profile.edit')}>PERFIL</Dropdown.Link>
                                         <Dropdown.Link href={route('logout')} method="post" as="button">
-                                            Log Out
+                                            SALIR
                                         </Dropdown.Link>
                                     </Dropdown.Content>
                                 </Dropdown>
@@ -119,6 +124,12 @@ export default function Authenticated({ user, header, children }) {
                         </ResponsiveNavLink>
                     </div>
 
+                    <div className="pt-2 pb-3 space-y-1">
+                        <ResponsiveNavLink href={route('estructuras.index')} active={route().current('estructuras.index')}>
+                            Estructuras
+                        </ResponsiveNavLink>
+                    </div>
+
                     <div className="pt-4 pb-1 border-t border-gray-200">
                         <div className="px-4">
                             <div className="font-medium text-base text-gray-800">{user.name}</div>
@@ -126,9 +137,9 @@ export default function Authenticated({ user, header, children }) {
                         </div>
 
                         <div className="mt-3 space-y-1">
-                            <ResponsiveNavLink href={route('profile.edit')}>Profile</ResponsiveNavLink>
+                            <ResponsiveNavLink href={route('profile.edit')}>PERFIL</ResponsiveNavLink>
                             <ResponsiveNavLink method="post" href={route('logout')} as="button">
-                                Log Out
+                                SALIR
                             </ResponsiveNavLink>
                         </div>
                     </div>

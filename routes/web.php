@@ -22,19 +22,20 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+    // return Inertia::render('Welcome', [
+    //     'canLogin' => Route::has('login'),
+    //     'canRegister' => Route::has('register'),
+    //     'laravelVersion' => Application::VERSION,
+    //     'phpVersion' => PHP_VERSION,
+    // ]);
+    return to_route('login');
 });
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -52,14 +53,25 @@ Route::prefix('control')->middleware('auth')->group(function () {
     Route::get('areas-influencia', [AreaInfluenciaController::class, 'index'])->name('areas.index');
     Route::get('areas-influencia/create', [AreaInfluenciaController::class, 'create'])->name('areas.create');
     Route::post('areas-influencia', [AreaInfluenciaController::class, 'store'])->name('areas.store');
-
     Route::get('areas-influencia/{areaInfluencia}/edit', [AreaInfluenciaController::class, 'edit'])->name('areas.edit'); //EDIT SE MANDA A LLAMAR DESDE LA TABLA DEL INDEX
     Route::post('areas-influencia/{areaInfluencia}', [AreaInfluenciaController::class, 'update'])->name('areas.update'); //EN UPDATE VIENE LA DATA ACTUALIZADA DE EDIT
     Route::delete('areas-influencia/{areaInfluencia}', [AreaInfluenciaController::class, 'destroy'])->name('areas.destroy');
 
     // --------------------------------------------------NIVELES------------------------------------------------------
     Route::get('niveles', [NivelController::class, 'index'])->name('niveles.index');
-    Route::get('estructuras', [EstructuraController::class, 'index'])->name('estructuras.index');
+
+
+    // --------------------------------------------------ESTRUCTURAS------------------------------------------------------
+    Route::get('estructura', [EstructuraController::class, 'index'])->name('estructuras.index');
+    Route::get('estructura/create', [EstructuraController::class, 'create'])->name('estructuras.create');
+    Route::post('estructura', [EstructuraController::class, 'store'])->name('estructuras.store');
+    Route::get('estructura/{estructura}/edit', [EstructuraController::class, 'edit'])->name('estructuras.edit');
+    Route::post('estructura/{estructura}', [EstructuraController::class, 'update'])->name('estructuras.update');
+    Route::delete('estructura/{estructuraBorrar}', [EstructuraController::class, 'destroy'])->name('estructuras.destroy');
+
+
+
+    // -----------------------------------TIPO DE ELECCIONES-----------------------------------------------------
     Route::get('tipo-eleccion', [TipoEleccionController::class, 'index'])->name('tipos.index');
 });
 

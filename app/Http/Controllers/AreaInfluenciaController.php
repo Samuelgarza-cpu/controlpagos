@@ -45,17 +45,9 @@ class AreaInfluenciaController extends Controller
         return to_route('areas.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(AreaInfluencia $areaInfluencia)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
+
     public function edit(AreaInfluencia $areaInfluencia)
     {
 

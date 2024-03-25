@@ -1,14 +1,15 @@
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, Link } from '@inertiajs/react';
-const Index_Area = ({ auth, areas }) => {
+import { Head, Link } from "@inertiajs/react"
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout"
+
+const EstructuraIndex = ({ auth, estructuras }) => {
     return (
         <AuthenticatedLayout
             user={auth.user}
             header={
                 <div className='flex justify-between'>
-                    <h2 className="font-semibold text-xl text-gray-800 leading-tight">Areas de Influencia</h2>
-                    <Link href={route('areas.create')}>
-                        CREAR AREA DE INFLUENCIA
+                    <h2 className="font-semibold text-xl text-gray-800 leading-tight">ESTRUCTURAS</h2>
+                    <Link href={route('estructuras.create')}>
+                        CREAR ESTRUCTURA
                     </Link>
                 </div>
             }
@@ -24,11 +25,9 @@ const Index_Area = ({ auth, areas }) => {
                                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                         <tr>
                                             <th scope="col" className="px-6 py-3">
-                                                Area
+                                                Estructura
                                             </th>
-                                            {/* <th scope="col" className="px-6 py-3">
-                                                ImagenDemo
-                                            </th> */}
+
                                             <th scope="col" className="px-6 py-3">
                                                 Accion
                                             </th>
@@ -36,20 +35,18 @@ const Index_Area = ({ auth, areas }) => {
                                     </thead>
                                     <tbody>
                                         {
-                                            areas?.map(area => (
-                                                <tr key={area.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                            estructuras?.map(estructura => (
+                                                <tr key={estructura.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                                     <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                        {area.nameAreaI}
+                                                        {estructura.nombreEstructura}
                                                     </th>
-                                                    {/* <td className="px-6 py-4">
-                                                        <img className='w-20' src={'/storage/logo.png'} alt="" srcSet="" />
-                                                    </td> */}
+
                                                     <td className="px-6 py-4">
                                                         <div className='space-x-3'>
-                                                            <Link href={route('areas.edit', [area])}>
+                                                            <Link href={route('estructuras.edit', [estructura])}>
                                                                 Editar
                                                             </Link>
-                                                            <Link method='delete' as="button" href={route('areas.destroy', [area])}>
+                                                            <Link as="button" method='delete' href={route('estructuras.destroy', [estructura])}>
                                                                 Eliminar
                                                             </Link>
                                                         </div>
@@ -71,4 +68,4 @@ const Index_Area = ({ auth, areas }) => {
     )
 }
 
-export default Index_Area
+export default EstructuraIndex

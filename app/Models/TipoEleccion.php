@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class TipoEleccion extends Model
 {
-    protected $table = 'tipo_eleccions';
+    protected $fillable = ['nombreEleccion'];
+    protected $hidden =  ['created_at,deleted_at'];
 }

@@ -5,24 +5,24 @@ import TextInput from '@/Components/TextInput';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 
-const CreateArea = ({ auth }) => {
+const CreateEstructura = ({ auth }) => {
     const valoresIniciales = {
-        nameAreaI: ""
+        nombreEstructura: ""
     }
     const { data, errors, setData, post } = useForm(valoresIniciales);
 
     const submit = (e) => {
         e.preventDefault();
-        post(route('areas.store'));
+        post(route('estructuras.store'));
     }
     return (
         <AuthenticatedLayout
             user={auth.user}
             header={
                 <div className='flex justify-between'>
-                    <h2 className="font-semibold text-xl text-gray-800 leading-tight">NUEVA AREA DE INFLUENCIA</h2>
-                    <Link href={route('areas.index')}>
-                        AREAS DE INFLUENCIA
+                    <h2 className="font-semibold text-xl text-gray-800 leading-tight">NUEVA ESTRUCTURA</h2>
+                    <Link href={route('estructuras.index')}>
+                        ESTRUCTURAS
                     </Link>
                 </div>
             }
@@ -36,21 +36,21 @@ const CreateArea = ({ auth }) => {
                             <div>
                                 <form onSubmit={submit} className='space-y-3'>
 
-                                    <InputLabel htmlFor="nameAreaI" value="Nombre" />
+                                    <InputLabel htmlFor="nombreEstructura" value="Nombre" />
                                     <TextInput
-                                        id="nameAreaI"
+                                        id="nombreEstructura"
                                         type="text"
-                                        name="nameAreaI"
-                                        value={data.nameAreaI}
+                                        name="nombreEstructura"
+                                        value={data.nombreEstructura}
                                         className="mt-1 block w-full"
                                         isFocused={true}
-                                        onChange={(e) => setData('nameAreaI', e.target.value)}
+                                        onChange={(e) => setData('nombreEstructura', e.target.value)}
                                     />
 
-                                    <InputError message={errors.nameAreaI} className="mt-2" />
+                                    <InputError message={errors.nombreEstructura} className="mt-2" />
                                     <div className='flex justify-center mt-5'>
                                         <PrimaryButton>
-                                            Crear Area
+                                            Crear Estructura
                                         </PrimaryButton>
                                     </div>
                                 </form>
@@ -63,4 +63,4 @@ const CreateArea = ({ auth }) => {
     )
 }
 
-export default CreateArea
+export default CreateEstructura

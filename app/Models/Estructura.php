@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Estructura extends Model
 {
-    protected $table = 'estructuras';
+    protected $fillable = ['nombreEstructura'];
+    protected $hidden =  ['created_at,deleted_at'];
 }
