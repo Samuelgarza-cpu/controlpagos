@@ -56,6 +56,10 @@ class RegistrosController extends Controller
     public function store(Request $request)
     {
 
+        $request->merge([
+            'nombre' => strtoupper($request->nombre)
+        ]);
+
         $request->validate([
             'nombre' => 'required',
             'estructura_id' => "required",
