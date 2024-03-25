@@ -27,7 +27,7 @@ const CreateEstructura = ({ auth }) => {
                 </div>
             }
         >
-            <Head title="Areas" />
+            <Head title="Estructuras" />
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">

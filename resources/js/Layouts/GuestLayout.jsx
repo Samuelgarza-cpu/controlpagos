@@ -8,7 +8,7 @@ export default function Guest({ children }) {
             <div>
                 <Link href="/">
                     {/* <ApplicationLogo className="w-20 h-20 fill-current text-gray-500" /> */}
-                    <img src={'/storage/login.svg'} alt="" srcSet="" />
+                    <img width={'160vw'} src={'/storage/login.svg'} alt="" srcSet="" />
                 </Link>
             </div>
 

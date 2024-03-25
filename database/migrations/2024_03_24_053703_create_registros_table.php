@@ -12,7 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('registros', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->string('nombre');
+            $table->foreignId('estructura_id')->references('id')->on('estructuras');
+            $table->foreignId('area_id')->references('id')->on('area_influencias');
+            $table->foreignId('nivel_id')->references('id')->on('nivels');
+            $table->string('tipo_eleccion');
             $table->timestamps();
         });
     }

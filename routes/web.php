@@ -59,6 +59,11 @@ Route::prefix('control')->middleware('auth')->group(function () {
 
     // --------------------------------------------------NIVELES------------------------------------------------------
     Route::get('niveles', [NivelController::class, 'index'])->name('niveles.index');
+    Route::get('niveles/create', [NivelController::class, 'create'])->name('niveles.create');
+    Route::get('niveles/{nivel}/edit', [NivelController::class, 'edit'])->name('niveles.edit');
+    Route::post('niveles', [NivelController::class, 'store'])->name('niveles.store');
+    Route::delete('niveles/{nivel}', [NivelController::class, 'destroy'])->name('niveles.destroy');
+    Route::post('niveles/{nivel}', [NivelController::class, 'update'])->name('niveles.update');
 
 
     // --------------------------------------------------ESTRUCTURAS------------------------------------------------------

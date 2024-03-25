@@ -1,20 +1,20 @@
 import { Head, Link } from "@inertiajs/react"
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout"
 
-const EstructuraIndex = ({ auth, estructuras }) => {
+const NivelIndex = ({ auth, niveles }) => {
     return (
         <AuthenticatedLayout
             user={auth.user}
             header={
                 <div className='flex justify-between'>
-                    <h2 className="font-semibold text-xl text-gray-800 leading-tight">ESTRUCTURAS</h2>
-                    <Link href={route('estructuras.create')}>
-                        CREAR ESTRUCTURA
+                    <h2 className="font-semibold text-xl text-gray-800 leading-tight">NIVELES</h2>
+                    <Link href={route('niveles.create')}>
+                        CREAR NIVEL
                     </Link>
                 </div>
             }
         >
-            <Head title="Estructuras" />
+            <Head title="Niveles" />
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -25,7 +25,10 @@ const EstructuraIndex = ({ auth, estructuras }) => {
                                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                         <tr>
                                             <th scope="col" className="px-6 py-3">
-                                                Estructura
+                                                Nivel
+                                            </th>
+                                            <th scope="col" className="px-6 py-3">
+                                                Importe
                                             </th>
 
                                             <th scope="col" className="px-6 py-3">
@@ -35,18 +38,21 @@ const EstructuraIndex = ({ auth, estructuras }) => {
                                     </thead>
                                     <tbody>
                                         {
-                                            estructuras?.map(estructura => (
+                                            niveles?.map(estructura => (
                                                 <tr key={estructura.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                                     <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                        {estructura.nombreEstructura}
+                                                        {estructura.nombreNivel}
+                                                    </th>
+                                                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                        {estructura.importe}
                                                     </th>
 
                                                     <td className="px-6 py-4">
                                                         <div className='space-x-3'>
-                                                            <Link href={route('estructuras.edit', [estructura])}>
+                                                            <Link href={route('niveles.edit', [estructura])}>
                                                                 Editar
                                                             </Link>
-                                                            <Link as="button" method='delete' href={route('estructuras.destroy', [estructura])}>
+                                                            <Link as="button" method='delete' href={route('niveles.destroy', [estructura])}>
                                                                 Eliminar
                                                             </Link>
                                                         </div>
@@ -68,4 +74,4 @@ const EstructuraIndex = ({ auth, estructuras }) => {
     )
 }
 
-export default EstructuraIndex
+export default NivelIndex

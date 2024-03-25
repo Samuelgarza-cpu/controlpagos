@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Nivel\StoreRequest;
 use App\Models\Nivel;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class NivelController extends Controller
 {
@@ -12,7 +14,8 @@ class NivelController extends Controller
      */
     public function index()
     {
-        //
+        $niveles = Nivel::all();
+        return Inertia::render('Nivel/Index', compact('niveles'));
     }
 
     /**
@@ -20,31 +23,22 @@ class NivelController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Nivel/Create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        Nivel::create($request->input());
+        return to_route('niveles.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Nivel $nivel)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Nivel $nivel)
     {
-        //
+        return Inertia::render('Nivel/Edit', compact('nivel'));
     }
 
     /**
@@ -52,7 +46,8 @@ class NivelController extends Controller
      */
     public function update(Request $request, Nivel $nivel)
     {
-        //
+        $nivel->update($request->input());
+        return to_route('niveles.index');
     }
 
     /**
@@ -60,6 +55,7 @@ class NivelController extends Controller
      */
     public function destroy(Nivel $nivel)
     {
-        //
+        $nivel->delete();
+        return to_route('niveles.index');
     }
 }

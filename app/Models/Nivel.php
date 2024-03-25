@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Nivel extends Model
 {
-    protected $table = 'nivels';
+    protected $fillable = ['nombreNivel', 'importe'];
+    protected $hidden =  ['created_at,deleted_at'];
 }
