@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('estructura_id')->references('id')->on('estructuras');
             $table->foreignId('area_id')->references('id')->on('area_influencias');
             $table->foreignId('nivel_id')->references('id')->on('nivels');
+            $table->foreignId('usuario_id')->references('id')->on('users');
             $table->string('tipo_eleccion');
             $table->timestamps();
         });

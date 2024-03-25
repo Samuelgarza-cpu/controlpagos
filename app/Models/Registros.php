@@ -7,5 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Registros extends Model
 {
-    protected $table = 'registros';
+    protected $fillable = ['nombre', 'estructura_id', 'area_id', 'nivel_id', "tipo_eleccion", "usuario_id"];
+    protected $hidden =  ['created_at,deleted_at'];
+
+    public function estructura()
+    {
+        return $this->belongsTo(Estructura::class, 'estructura_id');
+    }
+
+    public function nivel()
+    {
+        return $this->belongsTo(Nivel::class, 'nivel_id');
+    }
+    public function area()
+    {
+        return $this->belongsTo(AreaInfluencia::class, 'area_id');
+    }
 }
