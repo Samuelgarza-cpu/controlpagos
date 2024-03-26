@@ -57,7 +57,8 @@ class RegistrosController extends Controller
     {
 
         $request->merge([
-            'nombre' => strtoupper($request->nombre)
+            'nombre' => strtoupper($request->nombre),
+            'tipo_eleccion' => strtoupper($request->tipo_eleccion)
         ]);
 
         $request->validate([

@@ -1,0 +1,30 @@
+
+Warning: PHP Startup: Unable to load dynamic library 'php_pdo_sqlsrv_81_nts_x64' (tried: C:/laragon/bin/php/php-8.1.10-Win32-vs16-x64/ext\php_pdo_sqlsrv_81_nts_x64 (No se puede encontrar el módulo especificado), C:/laragon/bin/php/php-8.1.10-Win32-vs16-x64/ext\php_php_pdo_sqlsrv_81_nts_x64.dll (No se puede encontrar el módulo especificado)) in Unknown on line 0
+
+Warning: PHP Startup: Unable to load dynamic library 'php_sqlsrv_81_nts_x64' (tried: C:/laragon/bin/php/php-8.1.10-Win32-vs16-x64/ext\php_sqlsrv_81_nts_x64 (No se puede encontrar el módulo especificado), C:/laragon/bin/php/php-8.1.10-Win32-vs16-x64/ext\php_php_sqlsrv_81_nts_x64.dll (No se puede encontrar el módulo especificado)) in Unknown on line 0
+
+   INFO  Running migrations.  
+
+  2024_03_24_053703_create_registros_table .................................................................................... 3ms FAIL
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[42S01]: Base table or view already exists: 1050 Table 'registros' already exists (Connection: mysql, SQL: create table `registros` (`id` int unsigned not null auto_increment primary key, `nombre` varchar(255) not null, `estructura_id` bigint unsigned not null, `area_id` bigint unsigned not null, `nivel_id` bigint unsigned not null, `usuario_id` bigint unsigned not null, `tipo_eleccion` varchar(255) not null, `created_at` timestamp null, `updated_at` timestamp null) default character set utf8mb4 collate 'utf8mb4_unicode_ci')
+
+  at vendor\laravel\framework\src\Illuminate\Database\Connection.php:829
+    825▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    826▕                 );
+    827▕             }
+    828▕ 
+  ➜ 829▕             throw new QueryException(
+    830▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    831▕             );
+    832▕         }
+    833▕     }
+
+  1   vendor\laravel\framework\src\Illuminate\Database\Connection.php:587
+      PDOException::("SQLSTATE[42S01]: Base table or view already exists: 1050 Table 'registros' already exists")
+
+  2   vendor\laravel\framework\src\Illuminate\Database\Connection.php:587
+      PDOStatement::execute()
+

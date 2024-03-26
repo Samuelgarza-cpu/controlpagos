@@ -6,6 +6,7 @@ use App\Http\Controllers\ImagenPruebaController;
 use App\Http\Controllers\NivelController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TipoEleccionController;
+use App\Models\VistaNiveleImpotes;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -32,7 +33,8 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    $nivelesImporte = VistaNiveleImpotes::all();
+    return Inertia::render('Dashboard', compact('nivelesImporte'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth', 'verified'])->group(function () {

@@ -1,7 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 
-export default function Dashboard({ auth }) {
+export default function Dashboard({ auth, nivelesImporte }) {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -10,12 +10,27 @@ export default function Dashboard({ auth }) {
             <Head title="Dashboard" />
 
             <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900">GRAFICAS</div>
-                    </div>
+                <div className="flex flex-col bg-white p-8 rounded shadow-md w-auto  ">
+
+                    {nivelesImporte && nivelesImporte.map((nivelImporte) => (
+
+
+                        <a href="#" className="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+                            <img className="object-cover w-20 rounded-t-lg  md:rounded-none md:rounded-s-lg" src={`/storage/login.svg`} alt="" />
+                            <div className="flex flex-col justify-between p-4 leading-normal">
+                                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{nivelImporte.nombreNivel}</h5>
+                                <p className="mb-3 font-normal text-gray-700 dark:text-gray-400"> ${nivelImporte.Total}</p>
+                            </div>
+                        </a>
+
+                    )
+                    )}
+
+
+
+
                 </div>
             </div>
-        </AuthenticatedLayout>
+        </AuthenticatedLayout >
     );
 }
