@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Registros extends Model
 {
-    protected $fillable = ['nombre', 'estructura_id', 'area_id', 'nivel_id', "tipo_eleccion", "usuario_id"];
+    protected $fillable = ['nombre', 'rfc', 'telefono', 'estructura_id', 'area_id', 'nivel_id', "tipo_eleccion", 'ruta', "usuario_id"];
     protected $hidden =  ['created_at,deleted_at'];
 
     public function estructura()

@@ -58,7 +58,9 @@ class RegistrosController extends Controller
 
         $request->merge([
             'nombre' => strtoupper($request->nombre),
-            'tipo_eleccion' => strtoupper($request->tipo_eleccion)
+            'tipo_eleccion' => strtoupper($request->tipo_eleccion),
+            'rfc' => strtoupper($request->rfc),
+            'ruta' => strtoupper($request->ruta)
         ]);
 
         $request->validate([
@@ -66,12 +68,38 @@ class RegistrosController extends Controller
             'estructura_id' => "required",
             "area_id" => "required",
             "nivel_id" => "required",
-            'tipo_eleccion' => 'required'
+            'tipo_eleccion' => 'required',
+            'rfc' => ['required', 'regex:/^[A-Z]{4}[0-9]{6}$/', function ($attribute, $value, $fail) {
+                $existeRfc = Registros::where('rfc', $value)->first();
+                if ($existeRfc) $fail('Ya esta registrado este RFC');
+            }],
+            'telefono' => 'required|regex:/^[0-9]{10}$/',
+            'ruta' => 'required'
         ]);
+
         $request['usuario_id'] = Auth::user()->id;
         $registro = new Registros($request->input());
         $registro->save();
         return redirect('registros');
+
+        // $existeRfc = Registros::where('rfc', $request->rfc)->first();
+        // if ($existeRfc != null) {
+        //     try {
+        //         throw new \Exception("¡Algo salió mal!");
+        //     } catch (\Exception $e) {
+        //         return response()->json(['error' => $e->getMessage()], 500);
+        //     }
+
+        //     //    /*  return "ESTE RFC YA ESTA REGISTRADO"; */
+        // } else {
+        //     if (strlen($request->rfc) < 10) {
+        //         return "EL RFC TIENE QUE TENER MINIMO 10 CARACTERES";
+        //     }
+        //     $request['usuario_id'] = Auth::user()->id;
+        //     $registro = new Registros($request->input());
+        //     $registro->save();
+        //     return redirect('registros');
+        // }
     }
 
     public function update(Request $request, Registros $registro)
