@@ -49,7 +49,6 @@ class RegistrosController extends Controller
             'areas' => $areas,
             'registro' => $registros
         ];
-
         return Inertia::render('Registros/Edit', compact('selector'));
     }
 
