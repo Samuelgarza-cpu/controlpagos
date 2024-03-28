@@ -7,7 +7,6 @@ import { Head, Link, useForm } from '@inertiajs/react';
 import { useEffect } from 'react';
 
 const EditRegistro = ({ auth, selector }) => {
-    console.log(selector.registro.estructura_id);
     const valoresIniciales = {
         nombre: selector.registro.nombre,
         rfc: selector.registro.rfc,

@@ -5,6 +5,7 @@ use App\Http\Controllers\EstructuraController;
 use App\Http\Controllers\ImagenPruebaController;
 use App\Http\Controllers\NivelController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportesController;
 use App\Http\Controllers\TipoEleccionController;
 use App\Models\VistaNiveleImpotes;
 use Illuminate\Foundation\Application;
@@ -42,6 +43,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('registros', App\Http\Controllers\RegistrosController::class);
+    Route::post('movimientos/pagos', [ReportesController::class, 'pagos'])->name('movimientos.pagos');
+    Route::resource('movimientos', App\Http\Controllers\ReportesController::class);
+
 
     //    ---------------------  EJEMPLO DE SUBIR IMAGENES ----------------------
     Route::get('/imagen', [ImagenPruebaController::class, 'index'])->name('img.index');   //EN EL INDEX SE MUESTRA LA TABLA, TIENE BOTON PARA LLAMAR AL CREATE
