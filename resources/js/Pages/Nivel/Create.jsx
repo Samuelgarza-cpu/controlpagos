@@ -3,6 +3,7 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import { Transition } from '@headlessui/react';
 import { Head, Link, useForm } from '@inertiajs/react';
 
 const CreateEstructura = ({ auth }) => {
@@ -35,6 +36,7 @@ const CreateEstructura = ({ auth }) => {
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
                             <div>
+
                                 <form onSubmit={submit} className='space-y-3'>
 
                                     <InputLabel htmlFor="nombreNivel" value="Nombre Nivel" />

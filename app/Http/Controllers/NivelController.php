@@ -56,6 +56,6 @@ class NivelController extends Controller
     public function destroy(Nivel $nivel)
     {
         $nivel->delete();
-        return to_route('niveles.index');
+        return redirect()->route('niveles.index');
     }
 }

@@ -1,11 +1,31 @@
+import DangerButton from '@/Components/DangerButton';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
+import Modal from '@/Components/Modal';
 import PrimaryButton from '@/Components/PrimaryButton';
+import SecondaryButton from '@/Components/SecondaryButton';
 import TextInput from '@/Components/TextInput';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Transition } from '@headlessui/react';
+import { Head, useForm, usePage } from '@inertiajs/react';
+import { useEffect, useState } from 'react';
 
-const IndexMovimientos = ({ auth, selector }) => {
+const IndexMovimientos = ({ auth, selector, flash }) => {
+    // const { flash } = usePage().props
+    const [alertShow, setAlertShow] = useState(false);
+    const [confirmingApplyPayments, SetConfirmingApplyPayments] = useState(false);
+
+    useEffect(() => {
+        if (flash.message == 'PAGO APLICADO' || flash.message == 'NADA QUE APLICAR') {
+            setTimeout(() => {
+                setAlertShow(false)
+            }, 2000);
+            setAlertShow(true);
+        } else if (flash.message == 'YA HAY PAGOS') {
+            SetConfirmingApplyPayments(true);
+
+        }
+    }, [flash.message])
 
     const valoresIniciales = {
         nombre: "",
@@ -25,7 +45,13 @@ const IndexMovimientos = ({ auth, selector }) => {
         dataAll.push(selector.resultados)
         post(route('movimientos.pagos', dataAll));
     }
+    const closeModal = () => {
+        SetConfirmingApplyPayments(false);
 
+    };
+    const confirmPayments = () => {
+        SetConfirmingApplyPayments(true);
+    };
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -42,6 +68,17 @@ const IndexMovimientos = ({ auth, selector }) => {
 
             <div className="py-12">
                 <div className=" mx-auto sm:px-6 lg:px-8 space-y-6">
+                    <div className='flex justify-center'>
+                        <Transition
+                            show={alertShow}
+                            enter="transition ease-in-out"
+                            enterFrom="opacity-0"
+                            leave="transition ease-in-out"
+                            leaveTo="opacity-0"
+                        >
+                            <p className="text-xl text-gray-600">{flash.message}</p>
+                        </Transition>
+                    </div>
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className=" p-6 text-gray-900">
                             <form onSubmit={submit} className='space-y-3'>
@@ -173,10 +210,36 @@ const IndexMovimientos = ({ auth, selector }) => {
 
                             </tbody>
                         </table>
+
                     </div>
                 </div>
             </div >
+            {/* <DangerButton onClick={confirmPayments}>VALIDAR MODAL</DangerButton> */}
+            <Modal show={confirmingApplyPayments} onClose={closeModal}>
+                <form className="p-6">
+                    <h2 className="text-lg font-medium text-gray-900">
+                        ¿Estás seguro de que quieres procesar los pagos?
+                    </h2>
+
+                    <p className="mt-1 text-sm text-gray-600">
+                        ESTOS USUARIOS YA TIENEN PAGOS APLICADOS EN ESTE DIA.
+                    </p>
+
+                    <div className="mt-6">
+
+                    </div>
+
+                    <div className="mt-6 flex justify-end">
+                        <SecondaryButton onClick={closeModal}>Cancelar</SecondaryButton>
+
+                        <DangerButton onClick={handlePago} className="ms-3" >
+                            APLICAR PAGOS
+                        </DangerButton>
+                    </div>
+                </form>
+            </Modal>
         </AuthenticatedLayout >
+
     )
 }
 

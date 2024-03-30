@@ -37,31 +37,7 @@ class ReportesController extends Controller
     {
         //
     }
-    public function pagos(Request $request)
-    {
-        $array = $request->all();
-        $guardarPagos = [];
 
-        foreach ($array as $elemento) {
-            if (is_array($elemento)) {
-                if (isset($elemento['nombre']) && isset($elemento['nivel']['importe'])) {
-                    $guardarPago = [
-                        'id' => $elemento['id'],
-                        'nombre' => $elemento['nombre'],
-                        'estructura' => $elemento['estructura']['nombreEstructura'],
-                        'nivel' => $elemento['nivel']['nombreNivel'],
-                        'area' => $elemento['area']['nameAreaI'],
-                        'pago' =>  $elemento['nivel']['importe']
-                    ];
-                    // Agregar $guardarPago a $guardarPagos
-                    $guardarPagos[] = $guardarPago;
-                } else {
-                }
-            }
-        }
-
-        return $guardarPagos;
-    }
 
     /**
      * Store a newly created resource in storage.
