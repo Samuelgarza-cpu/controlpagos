@@ -65,6 +65,7 @@ const CreateRegistro = ({ auth, selector }) => {
                                         <TextInput
                                             id="rfc"
                                             type="text"
+                                            placeholder='ASDF010203'
                                             name="rfc"
                                             value={data.rfc}
                                             className="mt-1 block w-full"
