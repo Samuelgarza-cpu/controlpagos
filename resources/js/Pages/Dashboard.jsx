@@ -11,7 +11,7 @@ export default function Dashboard({ auth, nivelesImporte }) {
 
             <div className="py-12">
                 <div className="flex flex-col bg-white p-8 rounded shadow-md w-auto  ">
-
+                    {/* 
                     {nivelesImporte && nivelesImporte.map((nivelImporte) => (
 
 
@@ -24,7 +24,7 @@ export default function Dashboard({ auth, nivelesImporte }) {
                         </a>
 
                     )
-                    )}
+                    )} */}
 
 
 

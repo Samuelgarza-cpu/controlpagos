@@ -18,7 +18,6 @@ const NivelIndex = ({ auth, niveles }) => {
     };
     const exportExcel = () => {
         if (dataNiveles.length === 0) {
-            Toast.Info("No hay datos para exportar.");
             return;
         }
 

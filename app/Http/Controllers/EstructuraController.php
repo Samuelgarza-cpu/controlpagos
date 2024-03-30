@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Estructura\StoreRequest;
 use App\Models\Estructura;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class EstructuraController extends Controller
@@ -14,6 +15,9 @@ class EstructuraController extends Controller
      */
     public function index()
     {
+        if (Auth::user()->role_id != 1) {
+            return to_route('registros.index');
+        }
         $estructuras = Estructura::all();
         return Inertia::render('Estructura/Index', compact('estructuras'));
     }

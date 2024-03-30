@@ -17,7 +17,12 @@ class RegistrosController extends Controller
      */
     public function index()
     {
-        $registros = Registros::with('estructura', 'nivel', 'area')->get();
+        if (Auth::user()->role_id == 1) {
+            $registros = Registros::with('estructura', 'nivel', 'area')->get();
+        } else {
+            $registros = Registros::where('usuario_id', Auth::user()->id)->with('estructura', 'nivel', 'area')->get();
+        }
+
         return Inertia::render('Registros/Index', compact('registros'));
     }
     public function create()

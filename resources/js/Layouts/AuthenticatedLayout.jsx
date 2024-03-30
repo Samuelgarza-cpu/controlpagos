@@ -5,7 +5,7 @@ import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link } from '@inertiajs/react';
 
-export default function Authenticated({ user, header, children }) {
+export default function Authenticated({ auth, user, header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
     return (
@@ -22,35 +22,46 @@ export default function Authenticated({ user, header, children }) {
                             </div>
 
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink href={route('dashboard')} active={route().current('dashboard')}>
-                                    Dashboard
-                                </NavLink>
-                            </div>
-                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                 <NavLink href={route('registros.index')} active={route().current('registros.index')}>
                                     Registros
                                 </NavLink>
                             </div>
-                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink href={route('areas.index')} active={route().current('areas.index')}>
-                                    Areas de Influencia
-                                </NavLink>
-                            </div>
-                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink href={route('estructuras.index')} active={route().current('estructuras.index')}>
-                                    Estructuras
-                                </NavLink>
-                            </div>
-                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink href={route('niveles.index')} active={route().current('niveles.index')}>
-                                    Niveles
-                                </NavLink>
-                            </div>
-                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink href={route('movimientos.index')} active={route().current('movimientos.index')}>
-                                    Movimientos
-                                </NavLink>
-                            </div>
+
+                            {user.role_id == 1 &&
+                                <>
+                                    {/* <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                        <NavLink href={route('dashboard')} active={route().current('dashboard')}>
+                                            Dashboard
+                                        </NavLink>
+                                    </div> */}
+                                    <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                        <NavLink href={route('areas.index')} active={route().current('areas.index')}>
+                                            Areas de Influencia
+                                        </NavLink>
+                                    </div>
+                                    <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                        <NavLink href={route('estructuras.index')} active={route().current('estructuras.index')}>
+                                            Estructuras
+                                        </NavLink>
+                                    </div>
+                                    <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                        <NavLink href={route('niveles.index')} active={route().current('niveles.index')}>
+                                            Niveles
+                                        </NavLink>
+                                    </div>
+                                    <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                        <NavLink href={route('movimientos.index')} active={route().current('movimientos.index')}>
+                                            Movimientos
+                                        </NavLink>
+                                    </div>
+                                    <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                        <NavLink>
+                                            Pagos
+                                        </NavLink>
+                                    </div>
+                                </>
+                            }
+
 
                         </div>
 
@@ -119,33 +130,35 @@ export default function Authenticated({ user, header, children }) {
 
                 <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
                     <div className="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
-                            Dashboard
-                        </ResponsiveNavLink>
-                    </div>
-                    <div className="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink href={route('registros.index')} active={route().current('registros.index')}>
                             Registros
                         </ResponsiveNavLink>
                     </div>
+                    {user.role_id == 1 && <>
+                        {/* <div className="pt-2 pb-3 space-y-1">
+                            <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
+                                Dashboard
+                            </ResponsiveNavLink>
+                        </div> */}
 
-                    <div className="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink href={route('areas.index')} active={route().current('areas.index')}>
-                            Areas de Influencia
-                        </ResponsiveNavLink>
-                    </div>
 
-                    <div className="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink href={route('estructuras.index')} active={route().current('estructuras.index')}>
-                            Estructuras
-                        </ResponsiveNavLink>
-                    </div>
-                    <div className="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink href={route('niveles.index')} active={route().current('niveles.index')}>
-                            Niveles
-                        </ResponsiveNavLink>
-                    </div>
+                        <div className="pt-2 pb-3 space-y-1">
+                            <ResponsiveNavLink href={route('areas.index')} active={route().current('areas.index')}>
+                                Areas de Influencia
+                            </ResponsiveNavLink>
+                        </div>
 
+                        <div className="pt-2 pb-3 space-y-1">
+                            <ResponsiveNavLink href={route('estructuras.index')} active={route().current('estructuras.index')}>
+                                Estructuras
+                            </ResponsiveNavLink>
+                        </div>
+                        <div className="pt-2 pb-3 space-y-1">
+                            <ResponsiveNavLink href={route('niveles.index')} active={route().current('niveles.index')}>
+                                Niveles
+                            </ResponsiveNavLink>
+                        </div>
+                    </>}
                     <div className="pt-4 pb-1 border-t border-gray-200">
                         <div className="px-4">
                             <div className="font-medium text-base text-gray-800">{user.name}</div>

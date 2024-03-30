@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Nivel\StoreRequest;
 use App\Models\Nivel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class NivelController extends Controller
@@ -14,6 +15,9 @@ class NivelController extends Controller
      */
     public function index()
     {
+        if (Auth::user()->role_id != 1) {
+            return to_route('registros.index');
+        }
         $niveles = Nivel::all();
         return Inertia::render('Nivel/Index', compact('niveles'));
     }

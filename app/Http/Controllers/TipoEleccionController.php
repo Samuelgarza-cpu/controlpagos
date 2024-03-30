@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TipoEleccion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class TipoEleccionController extends Controller
@@ -13,6 +14,9 @@ class TipoEleccionController extends Controller
      */
     public function index()
     {
+        if (Auth::user()->role_id != 1) {
+            return to_route('registros.index');
+        }
         return Inertia::render('Tipo/Index');
     }
 

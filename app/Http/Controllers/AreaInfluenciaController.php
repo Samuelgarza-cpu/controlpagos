@@ -17,6 +17,9 @@ class AreaInfluenciaController extends Controller
      */
     public function index()
     {
+        if (Auth::user()->role_id != 1) {
+            return to_route('registros.index');
+        }
         $areas = AreaInfluencia::all();
         return Inertia::render('Area/Index', compact('areas'));
     }

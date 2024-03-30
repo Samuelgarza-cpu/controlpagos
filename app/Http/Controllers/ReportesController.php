@@ -8,6 +8,7 @@ use App\Models\Nivel;
 use App\Models\Registros;
 use App\Models\Reportes;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use stdClass;
 
@@ -18,6 +19,9 @@ class ReportesController extends Controller
      */
     public function index()
     {
+        if (Auth::user()->role_id != 1) {
+            return to_route('registros.index');
+        }
         $estructuras = Estructura::all();
         $niveles = Nivel::all();
         $areas = AreaInfluencia::all();

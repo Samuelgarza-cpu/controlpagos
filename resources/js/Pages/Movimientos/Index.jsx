@@ -79,6 +79,11 @@ const IndexMovimientos = ({ auth, selector, flash }) => {
                             <p className="text-xl text-gray-600">{flash.message}</p>
                         </Transition>
                     </div>
+                    < div className="sm:col-span-2 flex justify-center  h-16">
+                        <PrimaryButton className={'bg-blue-500 hover:bg-blue-700 text-white font-bold rounded w-2/5 flex items-center justify-center text-4xl'} onClick={handlePago}>
+                            PAGAR
+                        </PrimaryButton>
+                    </div>
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className=" p-6 text-gray-900">
                             <form onSubmit={submit} className='space-y-3'>
@@ -157,11 +162,7 @@ const IndexMovimientos = ({ auth, selector, flash }) => {
 
                                 </div>
                             </form>
-                            < div className="sm:col-span-2 flex justify-center absolute top-24 right-28  h-16 mt-14">
-                                <PrimaryButton onClick={handlePago}>
-                                    PAGAR
-                                </PrimaryButton>
-                            </div>
+
                         </div>
                     </div>
                     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">

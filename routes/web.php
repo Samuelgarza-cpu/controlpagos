@@ -45,6 +45,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('registros', App\Http\Controllers\RegistrosController::class);
     Route::post('movimientos/pagos', [PagosController::class, 'pagos'])->name('movimientos.pagos');
+    Route::post('movimientos/pagosagain', [PagosController::class, 'pagosagain'])->name('movimientos.pagosagain');
     Route::resource('movimientos', App\Http\Controllers\ReportesController::class);
 
 
