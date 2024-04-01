@@ -72,13 +72,23 @@ class ReportesController extends Controller
         $niveles = Nivel::all();
         $areas = AreaInfluencia::all();
 
+
+        $totalPagar = 0;
+        $totalRegistros = count($resultados);
+        foreach ($resultados as $value) {
+            $totalPagar = $totalPagar + $value['nivel']['importe'];
+        }
+
+
         $selector = [
             'estructuras' => $estructuras,
             'niveles' => $niveles,
             'areas' => $areas,
-            'resultados' => $resultados
+            'resultados' => $resultados,
+            'totalpagar' => $totalPagar,
+            'totalRegistros' => $totalRegistros
         ];
-        // dd($selector);
+
         return Inertia::render('Movimientos/Index', compact('selector'));
     }
 

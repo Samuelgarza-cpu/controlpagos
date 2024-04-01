@@ -21,7 +21,6 @@ const CreateRegistro = ({ auth, selector }) => {
 
     const submit = (e) => {
         e.preventDefault();
-        console.log(data);
         post(route('registros.store'));
     }
 

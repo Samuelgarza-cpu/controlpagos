@@ -9,10 +9,12 @@ const RegistroIndex = ({ auth, registros }) => {
         const filterNombreRegistro = await registros.filter((registro) => registro.nombre.toUpperCase().includes(textSearch.toUpperCase()))
         const filterEstructura = await registros.filter((registro) => registro.estructura.nombreEstructura.toUpperCase().includes(textSearch.toUpperCase()))
         const filterRfc = await registros.filter((registro) => registro.rfc.toUpperCase().includes(textSearch.toUpperCase()))
+        const filterNivel = await registros.filter((registro) => registro.nivel.nombreNivel.toUpperCase().includes(textSearch.toUpperCase()))
         const result = [];
         result.push(...filterNombreRegistro);
         result.push(...filterEstructura);
         result.push(...filterRfc);
+        result.push(...filterNivel);
         const data = [...new Set(result)];
         setDataRegistros(data);
 
@@ -20,30 +22,15 @@ const RegistroIndex = ({ auth, registros }) => {
     };
     const exportExcel = () => {
         if (dataRregistros.length === 0) {
-            Toast.Info("No hay datos para exportar.");
+            alert('NADA QUE EXPORTAR')
             return;
         }
-        // dataRregistros.map((reg) => {
-        //     switch (reg.estructura_id) {
-        //         case 1:
-        //             reg.estructura_id = 'CNOP'
-        //             break;
-        //         case 2:
-        //             reg.estructura_id = 'CASA MORELOS'
-        //             break;
-        //         case 3:
-        //             reg.estructura_id = 'CNC'
-        //             break;
-        //         case 4:
-        //             reg.estructura_id = 'PRI'
-        //             break;
-
-        //         default:
-        //             break;
-        //     }
-
-        //     return reg;
-        // })
+        dataRregistros.map((reg) => {
+            reg.estructura = reg.estructura.nombreEstructura,
+                reg.nivel = reg.nivel.nombreNivel,
+                reg.area = reg.area.nameAreaI
+            return reg;
+        })
         const worksheet = XLSX.utils.json_to_sheet(dataRregistros);
         const workbook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(workbook, worksheet, "Hoja 1");

@@ -32,7 +32,6 @@ const NivelIndex = ({ auth, niveles }) => {
         import("jspdf").then((jsPDF) => {
             import("jspdf-autotable").then(() => {
                 const doc = new jsPDF.default(0, 0);
-                console.log(dataNiveles);
                 doc.autoTable(exportColumns, dataNiveles);
                 doc.save("data.pdf");
             });
