@@ -1,6 +1,6 @@
 import { Head, Link } from "@inertiajs/react"
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import * as XLSX from 'xlsx';
 const NivelIndex = ({ auth, niveles }) => {
     const [dataNiveles, setDataNiveles] = useState(niveles);
@@ -37,6 +37,7 @@ const NivelIndex = ({ auth, niveles }) => {
             });
         });
     };
+    useEffect(() => { }, [niveles])
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -90,7 +91,7 @@ const NivelIndex = ({ auth, niveles }) => {
                                     </thead>
                                     <tbody>
                                         {
-                                            dataNiveles?.map(estructura => (
+                                            niveles?.map(estructura => (
                                                 <tr key={estructura.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                                     <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                         {estructura.nombreNivel}

@@ -6,6 +6,7 @@ use App\Http\Requests\Nivel\StoreRequest;
 use App\Models\Nivel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class NivelController extends Controller
@@ -19,6 +20,7 @@ class NivelController extends Controller
             return to_route('registros.index');
         }
         $niveles = Nivel::all();
+
         return Inertia::render('Nivel/Index', compact('niveles'));
     }
 
@@ -60,11 +62,13 @@ class NivelController extends Controller
     public function destroy(Nivel $nivel)
     {
         try {
+
             $nivel->delete();
+            return to_route('niveles.index');
+            // DB::delete('delete from nivels where id = ?', [$nivel->id]);
+            // return redirect('control/niveles');
         } catch (\Exception $e) {
             return $e->getMessage();
         }
-
-        return redirect()->route('niveles.index');
     }
 }
