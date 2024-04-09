@@ -1,9 +1,11 @@
 import { Head, Link } from "@inertiajs/react"
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import * as XLSX from 'xlsx';
 const RegistroIndex = ({ auth, registros }) => {
+
     const [dataRregistros, setDataRegistros] = useState(registros);
+
     const handleSearch = async (e) => {
         const textSearch = e.target.value;
         const filterNombreRegistro = await registros.filter((registro) => registro.nombre.toUpperCase().includes(textSearch.toUpperCase()))
@@ -37,6 +39,7 @@ const RegistroIndex = ({ auth, registros }) => {
         XLSX.writeFile(workbook, "Registros.xlsx");
 
     };
+    useEffect(() => { setDataRegistros(registros) }, [registros])
     return (
 
         < AuthenticatedLayout
@@ -107,7 +110,7 @@ const RegistroIndex = ({ auth, registros }) => {
                                     </thead>
                                     <tbody>
                                         {
-                                            registros?.map(registro => (
+                                            dataRregistros?.map(registro => (
 
                                                 <tr key={registro.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                                     <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
