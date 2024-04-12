@@ -26,6 +26,7 @@
         "jspdf-autotable": "^3.8.2",
         "sweetalert2": "^11.10.6",
         "tailwind-datepicker-react": "^1.4.3",
+        "tesseract.js": "^5.0.5",
         "xlsx": "^0.18.5"
     }
 }

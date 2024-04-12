@@ -4,7 +4,8 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import Tesseract, { createWorker } from 'tesseract.js';
 
 const CreateRegistro = ({ auth, selector }) => {
     const valoresIniciales = {
@@ -18,10 +19,23 @@ const CreateRegistro = ({ auth, selector }) => {
         ruta: ""
     }
     const { data, errors, setData, post } = useForm(valoresIniciales);
+    const [imagen, setImagen] = useState("");
+    const [textoFrontal, setTextoFrontal] = useState("");
 
     const submit = (e) => {
         e.preventDefault();
         post(route('registros.store'));
+    }
+
+    const handleFrontal = (e) => {
+        setImagen(URL.createObjectURL(e.target.files[0]));
+    }
+    const handleClick = async () => {
+
+        const worker = await createWorker('spa');
+        const ret = await worker.recognize(imagen);
+        setTextoFrontal(ret.data.text);
+        await worker.terminate();
     }
 
     return (
@@ -42,9 +56,41 @@ const CreateRegistro = ({ auth, selector }) => {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
+                            <div className='grid grid-cols-4 gap-x-6 mb-6 '>
+                                <div className="sm:col-span-1">
+                                    <InputLabel htmlFor="frontal" value="FRONTAL" />
+                                    <TextInput
+                                        id="frontal"
+                                        type="file"
+                                        name="frontal"
+                                        accept="image/*"
+                                        className="mt-1 block w-full"
+                                        onChange={(e) => handleFrontal(e)}
+
+                                    />
+                                    <InputError message={errors.reverso} className="mt-2" />
+                                </div>
+                                <div className='sm:col-span-1'>
+                                    <img src={imagen} width={70} alt="frontal" srcset="" />
+                                </div>
+                                <div className="sm:col-span-1">
+                                    <InputLabel htmlFor="reverso" value="REVERSO" />
+                                    <TextInput
+                                        id="reverso"
+                                        type="file"
+                                        name="reverso"
+                                        className="mt-1 block w-full"
+
+                                    />
+                                    <InputError message={errors.reverso} className="mt-2" />
+                                </div>
+                            </div>
+                            <button onClick={handleClick} style={{ height: 50 }}> convert to text</button>
+                            <div className="text-box">
+                                <p> {textoFrontal} </p>
+                            </div>
                             <form onSubmit={submit} className='space-y-3'>
                                 {/* NOMBRE */}
-
                                 <div className=' grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6'>
                                     <div className="sm:col-span-2">
                                         <InputLabel htmlFor="nombre" value="Nombre" />
