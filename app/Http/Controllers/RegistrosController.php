@@ -77,8 +77,8 @@ class RegistrosController extends Controller
                 $existeRfc = Registros::where('rfc', $value)->first();
                 if ($existeRfc) $fail('Ya esta registrado este RFC');
             }],
-            'telefono' => 'required|regex:/^[0-9]{10}$/',
-            'ruta' => 'required'
+            // 'telefono' => 'required|regex:/^[0-9]{10}$/',
+            // 'ruta' => 'required'
         ]);
 
         $request['usuario_id'] = Auth::user()->id;

@@ -56,7 +56,7 @@ const CreateRegistro = ({ auth, selector }) => {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
-                            <div className='grid grid-cols-4 gap-x-6 mb-6 '>
+                            {/* <div className='grid grid-cols-4 gap-x-6 mb-6 '>
                                 <div className="sm:col-span-1">
                                     <InputLabel htmlFor="frontal" value="FRONTAL" />
                                     <TextInput
@@ -84,8 +84,8 @@ const CreateRegistro = ({ auth, selector }) => {
                                     />
                                     <InputError message={errors.reverso} className="mt-2" />
                                 </div>
-                            </div>
-                            <button onClick={handleClick} style={{ height: 50 }}> convert to text</button>
+                            </div> */}
+                            {/* <button onClick={handleClick} style={{ height: 50 }}> convert to text</button> */}
                             <div className="text-box">
                                 <p> {textoFrontal} </p>
                             </div>
